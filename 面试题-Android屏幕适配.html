@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>面试题-Android屏幕适配</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>面试题-Android屏幕适配（使用AS实现）</h1>
+<h2>名词解释</h2>
+<blockquote>
+<p>屏幕尺寸：指屏幕的物理尺寸，一般用屏幕的对角线长度表示，单位英寸<em>inch</em>。（1英寸=2.54厘米）</p>
+<p>分辨率：整个屏幕的像素数目，为了表示方便一般用屏幕的像素宽度（水平像素数目）乘以像素高度表示，形如1280x720，<strong>反之分辨率为1280x720的屏幕，像素宽度不一定为1280</strong>。 <em>如果分辨率相同，手机屏幕越小越清晰</em>。</p>
+<p>像素（px/pix）：屏幕中最小的一个现实单元。</p>
+<p>像素密度/屏幕密度（dpi）:每英寸屏幕所拥有的像素数，像素密度越大，显示画面的细节就越丰富，也就是越清晰。</p>
+<blockquote>
+<p>计算公式：像素密度 = √{（长度像素数^2 + 宽度像素数^2）} / 屏幕尺寸</p>
+<p>PS：屏幕尺寸单位为英寸	例：分辨率为1280 * 720屏幕尺寸为6英寸	计算所得像素密度约等于245.</p>
+</blockquote>
+<p>dp/dip(device independent pixels):设备独立像素,显示的时候根据具体平台屏幕密度的不同最终转换为相应的像素长度。</p>
+<blockquote>
+<p>具体转换规则是: 1dp = （目标屏幕密度/标准密度）*px,标准密度为160dpi，例如，1dp长度在密度为160dpi的平台表示一个像素的长度，而在240dpi的平台则表示1.5个像素的长度。</p>
+</blockquote>
+</blockquote>
+<p>以上是最基本的概念，懂了这些再来看下Android中时如何来定义屏幕的大小的：</p>
+<p>屏幕尺寸分为：small，normal，large，xlarge分别表示小，中，大，超大屏</p>
+<p>屏幕密度分为：ldpi，mdpi，hdpi，xhdpi，xxhdpi它们标准值分别是：120dpi，160dpi，240dpi，320dpi，480dpi</p>
+<blockquote>
+<p>ps:每一种dpi对应一个dpi范围，480dpi包括400dpi~560dpi,如：Samsung S4的dpi为441,虽然没到480，但它属于xxhdpi(480dpi)这个标准</p>
+</blockquote>
+<p>我们用个图来直观的看一下</p>
+<p><img src="http://i.imgur.com/zUYctql.png" /></p>
+<blockquote>
+<p>基本上3inch以下的归为small，而normal据我通过Studio实际操作的到的结果是：几乎3-6inch之间（不包括6inch）的都算是normal（除了个别5.x的WVGA属于Large等个例），在后面的实际操作中我们还会进一步看到。</p>
+<p>而屏幕密度其实也是和屏幕大小相对应的，一般来说，屏幕越大的，密度也越高。如果你非得说我的6英寸的大手机，分辨率是800x600，那我的dpi也就160，那是可以的，但是那么大的屏幕，分辨率却很低，这样的设备估计也没人买单，所以，市场的主流也反映出来，屏幕密度越大，屏幕也相对来说要大一些。</p>
+</blockquote>
+<h2>1. Android手机目前常见的分辨率</h2>
+<h3>1.1 手机常见的分辨率</h3>
+<ul>
+<li>4:3</li>
+<li>VGA     640*480 (Video Graphics Array)</li>
+<li>QVGA  320*240 (Quarter VGA)</li>
+<li>HVGA  480*320 (Half-size VGA)</li>
+<li>SVGA  800*600 (Super VGA)</li>
+<li>5:3</li>
+<li>WVGA  800*480 (Wide VGA)</li>
+<li>16:9</li>
+<li>FWVGA 854*480 (Full Wide VGA)</li>
+<li>HD        1920*1080 High Definition</li>
+<li>QHD     960*540	</li>
+<li>720p    1280*720  标清</li>
+<li>1080p  1920*1080 高清</li>
+<li>手机:</li>
+<li>iphone 4/4s    960*640 (3:2)</li>
+<li>iphone5         1136*640</li>
+<li>小米1             854*480(FWVGA)</li>
+<li>
+<p>小米2             1280*720</p>
+</li>
+<li>
+<p>VGA：Video Graphics Array，即：显示绘图矩阵，相当于640×480 像素；</p>
+</li>
+<li>HVGA：Half-size VGA，即：VGA的一半，分辨率为480×320，像三星盖世Ace S5830就是使用这分辨率；</li>
+<li>QVGA：Quarter VGA，即：VGA的四分之一，分辨率为320×240，一般用于小屏手机 像三星盖世Mini S5570就是使用这分辨率；</li>
+<li>WQVGA：Wide Quarter VGA，即：扩大的QVGA，分辨率比QVGA高，比VGA低，一般是：400×240，480×272；</li>
+<li>WVGA：Wide Video Graphics Array，即：扩大的VGA，分辨率为800×480像素，像三星i9000就是使用这分辨率；</li>
+<li>FWVGA：Full Wide VGA ，数码产品屏幕材质的一种，VGA的另一种形式，比WVGA分辨率高，别名 ： Full Wide VGA, ，其分辨 率为854×480象素(16:9)。</li>
+</ul>
+<h3>1.2 分辨率对应DPI</h3>
+<ul>
+<li>&quot;HVGA    mdpi    160dpi&quot;</li>
+<li>&quot;WVGA   hdpi    240dpi&quot;</li>
+<li>&quot;FWVGA hdpi    240dpi&quot;</li>
+<li>&quot;QHD      hdpi    240dpi&quot;</li>
+<li>&quot;720P     xhdpi    320dpi&quot;</li>
+<li>&quot;1080P   xxhdpi    480dpi&quot;</li>
+</ul>
+<h2>2. 如何在Studio中完成多种设备的屏幕适配</h2>
+<p>我们打开工程默认的Layout文件夹，然后选中一个XML布局文件，然后在Studio的右上角，我们能看到列出了很多设备</p>
+<p><img src="http://i.imgur.com/e9ABGXd.png" /></p>
+<p>我们能看到这里面有各种各样大小和密度的设备。那我们知道在实际过程中，为了适配不同的屏幕，需要设置相应的XML文件夹（layout-normal,layout-large等），这样程序在读取到相应的设备的时候，能自动去不同的文件夹中读取。如果大家没有设置，那我们的程序当前就只有一个默认的文件夹，叫做layout，来存放XML页面布局文件，当然，我们的程序也就不能适配不同大小和DPI的设备了。那我们就来创建相应的文件夹吧。</p>
+<p><img src="http://i.imgur.com/KUSAhzz.png" /></p>
+<p>如上图红框所示，我们选择创建一个android资源目录</p>
+<p><img src="http://i.imgur.com/BI6JJxl.png" /></p>
+<p>资源类型改为“layout”，选择Size然后选择“&gt;&gt;”</p>
+<p><img src="http://i.imgur.com/wCaHkex.png" /></p>
+<p>选择一个Normal来看下效果吧</p>
+<p><img src="http://i.imgur.com/gjQ4Lmg.png" /></p>
+<p>这个时候，在左侧的导航栏，其实多了一个文件夹layout-normal，我们手动复制一份activity<em>main.xml到里面，点击进去，也就是如果我们接着编辑，就是对Normal尺寸大小的设备的activity</em>main.xml文件进行修改了，如果你点击右上角查看设备，会发现Android Wear设备，也就是可穿戴设备前面有了个灰色的X，并且点击Generic Phones and Tablets按钮，在弹出的更多的设备中，我们能看到有两个设备前面打了x号，因为这两个设备是2.7inch的，之前我们也说过，3inch以下的设备都是small类型的。</p>
+<p>那有人就有疑问了，那不可能剩下的所有设备都是normal的啊？当然不是，但是因为我们现在已经对layout做了区分，但是还没有分那么细，所以Studio就默认“向下兼容”了。</p>
+<p>我们可以接着来创见一个layout-large来试验一下就ok了</p>
+<p><img src="http://i.imgur.com/CiHLkV5.png" /></p>
+<p>我们看到在左侧导航栏又多出来一个文件夹 layout-xlarge，这下再来看设备列表。基本上所有的设备前面都是x了，只有少数几个8inch以上的设备被包含了进来，剩下的大部分还是处在normal文件夹中，而large的设备（5-8inch之间）因为向下兼容，换句话说，没有资格进入到xlarge文件夹中，所以还是留在了normal文件夹中。</p>
+<p>之前我们也说过，因为3-6inch的很多设备都算是Normal的，那就很容易出现5.x英寸xxhdpi的设备和3.7英寸hdpi的设备都归到normal文件中</p>
+<p><img src="http://i.imgur.com/WhunDru.png" /></p>
+<p>如上图所示，Nexus One 和Nexus6P明显设备大小差很多，但是却都属于Normal的，所以就可能出现下面的情况</p>
+<p><img src="http://i.imgur.com/9F96hT8.png" /></p>
+<ul>
+<li>如上图所示，我们添加了一个图片，图片的长宽都是300dp。</li>
+<li>说到这里我们再回顾一下吧，基本上有个定论大家都知道：</li>
+<li>在XML文件中控件的大小单位用dp，文字的大小单位用sp。</li>
+<li>因为这样子可以保证在不同的设备上显示同样大小的控件；这里说的同样大小指的是控件的绝对大小，而dp单位设置的目的也就是如此。</li>
+<li>而这样就容易出现一个问题，就是因为屏幕尺寸的不同，导致同样大小的控件在不同是屏幕下面显示的相对大小发生很大的变化。</li>
+<li>我们还是看个实际的例子吧。</li>
+<li>上图里面300x300dp的图片在Nexus One（3.7 inch）上面看起来比较和谐，在屏幕中间占的位置也很合适，</li>
+<li>但是在大一点的屏幕上面呢？</li>
+</ul>
+<p><img src="http://i.imgur.com/NB7VE3m.png" /><img src="http://i.imgur.com/NI8WmLZ.png" /></p>
+<ul>
+<li>我们可以发现在Nexus 6（6 inch）里面图片相对于手机来说变小了。那因为Nexus One（3.7inch）和Nexus6（6inch）都属于Normal范围之内的，我们似乎不能通过设置不同的文件夹来处理的。</li>
+<li>事实真的是这样么？</li>
+<li>别忘记了我们还有不同的屏幕密度可以作为区分。</li>
+<li>让我们先清理一下layout系列文件，删除我们之前创建好的layout-normal和layout-large文件夹</li>
+</ul>
+<p>用同样的方法创建新的layout文件夹，只不过这次文件夹的名字是layout-normal-ldpi</p>
+<p><img src="http://i.imgur.com/aXSiSxU.png" /></p>
+<ul>
+<li>同样的方法再创建一个文件夹 layout-normal-mdpi</li>
+<li>我们来看右侧所有设备的列表，当我们选中layout-normal-mdpi时，我们能看到有几个设备前面是x，也就是不属于这个文件夹的，而我们也能看到他们属于的文件夹的位置，图中我用两个红圈表示了出来。</li>
+<li>因为现在layout的文件夹只有3个：一个默认的layout，一个layout-normal-mdpi还有一个是layout-normal-ldpi，那我们能看到两个2.7 inch的设备是处在默认的layout文件夹中，而两个虽说屏幕大小达到了normal，但是密度却没有达到mdpi的设备则处在了layout-normal-ldpi文件夹中。</li>
+<li>这里同样的，屏幕密度也符合上面说的“向下兼容”的原则。因为我们还没有创建比mdpi更高的屏幕密度，所以包括hdpi，xhdpi，xxhdpi等都放在当前的mdpi文件夹下面。</li>
+</ul>
+<p><img src="http://i.imgur.com/8MOttv9.png" /></p>
+<p>让我们接着创建layout-normal-hdpi文件夹，可以看到有很多设备从mdpi中移了出来，因为当前有了更适合他们呆的地方---hdpi</p>
+<p><img src="http://i.imgur.com/BQjsWw4.png" /></p>
+<ul>
+<li>最后当我们创建好layout-normal-xhdpi之后，我们发现终于，两个小屏幕但是密度是hdpi的设备 Nexus S和Nexus One终于和上面的那些同样是normal屏幕大小但是密度也大的设备分离开来了。</li>
+<li>这样我们就能分开来调整界面了~</li>
+</ul>
+<p><img src="http://i.imgur.com/UFYRXVV.png" /></p>
+<p>让我们修改layout-normal-xhdpi文件夹下面的XML页面布局文件，然后将图片的大小改为400dp，在来看一下，同样的Nexus 6 的屏幕 是不是看起来更和谐一点了？</p>
+<p><img src="http://i.imgur.com/SYixk62.png" /></p>
+<p>这样基本上我们就成功实现了对多设备的支持。</p>
+<p>总结下来：</p>
+<blockquote>
+<ol>
+<li>Android Studio可以很方便地为我们创建多个文件夹，只需要选中想要完成多设备适配的XML文件，然后点击右上角的菜单，创建自己想要实现的屏幕大小，就OK了。</li>
+<li>在程序运行时，会自动寻找最接近当前屏幕大小分类的文件夹中的XML布局文件去显示。</li>
+</ol>
+</blockquote>
+<p>所以，之后再开发的话，我的步骤是：</p>
+<blockquote>
+<ol>
+<li>先创建4个不同的layout文件夹  layout-small, layout-normal, layout-large, layout-large,</li>
+<li>如果在开发过程中有遇到进一步适配（不同的DPI），就另外创建新的文件夹出来，因为即便同时有layout-normal和layout-normal-hdpi文件夹，当你的设备是normal大小、高密度的屏幕时，也能自动显示layout-normal-hdpi中的XML文件，就是这么智能。</li>
+<li>虽然文中我举的例子是用图片，但是实际开发中，如果要添加的内容是图片，就要在drawable文件夹下面做出不同设备大小的分类了，然后在XML文件中设置长宽分别是wrap-content；但是我们总会遇到要填充比如第三方控件的情况，那这种类型就不适用了。</li>
+<li>尽量用RelativeLayout来完成页面的布局，这样子可以更好的做适配，相对布局在大部分情况下比绝对布局要容易很多</li>
+</ol>
+</blockquote>
+<h2>适配方式之java代码适配</h2>
+<ul>
+<li>为了演示用java代码控制适配的效果，因此假设有这样的需求，让一个TextView控件的宽和高</li>
+<li>分别为屏幕的宽和高的一半。</li>
+<li>
+<p>我们新创建一个Android工程，修改main_activity.xml，布局文件清单如下：</p>
+<pre><code>    &lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; 
+        xmlns:tools=&quot;http://schemas.android.com/tools&quot; 
+        android:layout_width=&quot;match_parent&quot; 
+        android:layout_height=&quot;match_parent&quot;
+        tools:context=&quot;.MainActivity&quot; &gt;
+
+        &lt;!-- 当前控件宽高为屏幕宽度的各 50% --&gt; 
+        &lt;TextView 
+            android:id=&quot;@+id/tv&quot; 
+            android:background=&quot;#000000&quot; 
+            android:layout_width=&quot;wrap_content&quot; 
+            android:layout_height=&quot;wrap_content&quot; 
+            android:text=&quot;@string/hello_world&quot; /&gt; 
+    &lt;/RelativeLayout&gt;
+</code></pre>
+
+</li>
+</ul>
+<p>在MainActivity.java类中完成用java代码控制TextView的布局效果，其代码清单如下：</p>
+<pre><code> //获取 TextView 控件
+ TextView tv = (TextView) findViewById(R.id.tv);
+ //找到当前控件的父控件(父控件上给当前的子控件去设定一个规则)
+ DisplayMetrics metrics = new DisplayMetrics();
+ //给当前 metrics 去设置当前屏幕信息(宽(像素)高(像素))
+ getWindowManager().getDefaultDisplay().getMetrics(metrics);
+ //日志输出屏幕的高度和宽度
+ Log.i(&quot;aaa&quot;, &quot;Constant.srceenHeight = &quot;+metrics.heightPixels);
+ Log.i(&quot;aaa&quot;, &quot;Constant.srceenWidth = &quot;+metrics.widthPixels);
+ //宽高各 50%
+ RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+         (int)(metrics.widthPixels*0.5), (int)(metrics.heightPixels*0.5));
+ //给 tv 控件设置布局参数
+ tv.setLayoutParams(layoutParams);
+</code></pre>
+
+<h2>适配方式之weight权重适配</h2>
+<p>在控件中使用属性android:layout_weight=&quot;1&quot;可以起到适配效果，但是该属性的使用有如下规则：</p>
+<ul>
+<li>只能用在线性控件中，比如LinearLayout。</li>
+<li>竖直方向上使用权重的控件高度必须为0dp（Google官方的推荐用法）</li>
+<li>水平方向上使用权重的控件宽度必须为0dp（Google官方的推荐用法）</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
